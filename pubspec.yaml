@@ -49,6 +49,7 @@ dependencies:
   isar_flutter_libs: ^3.1.0+1
   modular_bloc_bind: ^1.0.1
   path_provider: ^2.0.15
+  phosphor_flutter: ^2.0.0
   validatorless: ^1.2.3
 
 dev_dependencies:
@@ -77,7 +78,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
