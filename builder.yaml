@@ -5,3 +5,4 @@ targets:
         generate_for:
           - "lib/app/modules/**_bloc.dart"
           - "lib/app/modules/**_cubit.dart"
+          - "lib/app/data/entities/**_cubit.dart"
