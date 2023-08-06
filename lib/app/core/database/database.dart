@@ -1,6 +1,8 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../data/entities/project.dart';
+import '../../data/entities/project_task.dart';
 import 'i_database.dart';
 
 class Database implements IDatabase {
@@ -12,7 +14,7 @@ class Database implements IDatabase {
       final dir = await getApplicationSupportDirectory();
 
       _databaseInstance = await Isar.open(
-        [],
+        [ProjectSchema, ProjectTaskSchema],
         directory: dir.path,
       );
     }

@@ -27,8 +27,14 @@ class AppTheme {
     primarySwatch: _primarySwatch,
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,
+    appBarTheme: const AppBarTheme(
+      foregroundColor: Colors.white,
+      backgroundColor: Color(0xFF0067B1),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF0067B1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
