@@ -1,7 +1,7 @@
 targets:
   default:
     builders:
-      bloc|freezed:
+      bloc|freezed|isar:
         generate_for:
           - "lib/app/modules/**_bloc.dart"
           - "lib/app/modules/**_cubit.dart"

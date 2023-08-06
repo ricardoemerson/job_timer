@@ -1,8 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
-part 'home_state.dart';
+import '../../data/services/auth/i_auth_service.dart';
+import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+  final IAuthService _authService;
+
+  HomeCubit({
+    required IAuthService authService,
+  })  : _authService = authService,
+        super(const HomeState.initial());
+
+  Future<void> signOut() async {
+    await _authService.signOut();
+  }
 }
