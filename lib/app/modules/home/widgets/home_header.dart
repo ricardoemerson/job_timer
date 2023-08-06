@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/extensions/extensions.dart';
 import '../../../data/enums/project_status_enum.dart';
@@ -36,7 +37,7 @@ class HomeHeader extends SliverPersistentHeaderDelegate {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => Modular.to.pushNamed('/projects/project-register'),
                   icon: const Icon(Icons.add),
                   label: const Text('Novo Projeto'),
                 )
