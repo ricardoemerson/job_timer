@@ -55,6 +55,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit> {
                 height: 49,
                 child: ElevatedButton(
                   onPressed: widget.cubit.signIn,
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[100]),
                   child: Image.asset('assets/images/google.png'),
                 ),
               ),
