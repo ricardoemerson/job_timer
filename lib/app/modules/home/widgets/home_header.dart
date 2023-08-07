@@ -3,8 +3,15 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/extensions/extensions.dart';
 import '../../../data/enums/project_status_enum.dart';
+import '../home_cubit.dart';
 
 class HomeHeader extends SliverPersistentHeaderDelegate {
+  final HomeCubit cubit;
+
+  HomeHeader({
+    required this.cubit,
+  });
+
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return LayoutBuilder(
@@ -37,7 +44,11 @@ class HomeHeader extends SliverPersistentHeaderDelegate {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () => Modular.to.pushNamed('/projects/project-register'),
+                  onPressed: () async {
+                    await Modular.to.pushNamed('/projects/project-register');
+
+                    cubit.loadProjects();
+                  },
                   icon: const Icon(Icons.add),
                   label: const Text('Novo Projeto'),
                 )

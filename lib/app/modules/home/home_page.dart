@@ -50,6 +50,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit> {
           );
         },
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
             const SliverAppBar(
               title: Text('Projetos'),
@@ -63,7 +64,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit> {
               ),
             ),
             SliverPersistentHeader(
-              delegate: HomeHeader(),
+              delegate: HomeHeader(cubit: cubit),
               pinned: true,
             ),
             BlocSelector<HomeCubit, HomeState, List<ProjectModel>>(
