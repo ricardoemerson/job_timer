@@ -28,7 +28,12 @@ class HomeHeader extends SliverPersistentHeaderDelegate {
                   height: 80,
                   width: context.percentWidth(.5),
                   child: DropdownButtonFormField<ProjectStatusEnum>(
-                    onChanged: (value) {},
+                    onChanged: (status) {
+                      if (status != null) {
+                        cubit.filter(status);
+                      }
+                    },
+                    value: ProjectStatusEnum.em_andamento,
                     items: ProjectStatusEnum.values
                         .map(
                           (e) => DropdownMenuItem(
