@@ -25,7 +25,7 @@ class AppTheme {
 
   static final theme = ThemeData(
     primaryColor: AppColors.instance.primary,
-    primaryColorLight: const Color(0xFF219FFF),
+    primaryColorLight: AppColors.instance.primaryLight,
     primarySwatch: _primarySwatch,
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../data/models/project_model.dart';
 import 'project_name.dart';
@@ -14,22 +15,27 @@ class ProjectTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 90),
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.grey[300]!,
-        ),
-      ),
-      child: Column(
-        children: [
-          ProjectName(project: project),
-          Expanded(
-            child: ProjectProgress(project: project),
+    return InkWell(
+      onTap: () {
+        Modular.to.pushNamed('/projects/project-detail', arguments: project);
+      },
+      child: Container(
+        constraints: const BoxConstraints(maxHeight: 90),
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Colors.grey[300]!,
           ),
-        ],
+        ),
+        child: Column(
+          children: [
+            ProjectName(project: project),
+            Expanded(
+              child: ProjectProgress(project: project),
+            ),
+          ],
+        ),
       ),
     );
   }

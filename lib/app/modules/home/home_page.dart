@@ -59,7 +59,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit> {
               toolbarHeight: 100,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(15),
+                  bottom: Radius.circular(16),
                 ),
               ),
             ),
