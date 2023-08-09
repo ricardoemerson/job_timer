@@ -5,6 +5,7 @@ import 'package:validatorless/validatorless.dart';
 
 import '../../../core/base_state/base_state.dart';
 import '../../../core/extensions/extensions.dart';
+import '../../../core/widgets/loader_button.dart';
 import 'project_register_cubit.dart';
 import 'project_register_state.dart';
 
@@ -86,7 +87,12 @@ class _ProjectRegisterPageState extends BaseState<ProjectRegisterPage, ProjectRe
                 SizedBox(
                   width: double.infinity,
                   height: 49,
-                  child: ElevatedButton(
+                  child: LoaderButton<ProjectRegisterCubit, ProjectRegisterState>(
+                    bloc: cubit,
+                    selector: (state) => state.status.matchAny(
+                      loading: () => true,
+                      any: () => false,
+                    ),
                     onPressed: () async {
                       final formIsValid = _formKey.currentState?.validate() ?? false;
 
@@ -97,7 +103,8 @@ class _ProjectRegisterPageState extends BaseState<ProjectRegisterPage, ProjectRe
                         );
                       }
                     },
-                    child: const Text('Salvar'),
+                    label: 'Salvar',
+                    loadingLabel: 'Salvando...',
                   ),
                 ),
               ],
