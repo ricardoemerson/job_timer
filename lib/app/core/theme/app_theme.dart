@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
+
 class AppTheme {
   AppTheme._();
 
@@ -22,19 +24,19 @@ class AppTheme {
   });
 
   static final theme = ThemeData(
-    primaryColor: const Color(0xFF0066B0),
+    primaryColor: AppColors.instance.primary,
     primaryColorLight: const Color(0xFF219FFF),
     primarySwatch: _primarySwatch,
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       foregroundColor: Colors.white,
-      backgroundColor: Color(0xFF0067B1),
+      backgroundColor: AppColors.instance.primary,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: const Color(0xFF0067B1),
+        backgroundColor: AppColors.instance.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -52,7 +54,7 @@ class AppTheme {
       errorBorder: defaultInputBorder.copyWith(
         borderSide: const BorderSide(color: Colors.redAccent),
       ),
-      labelStyle: const TextStyle(color: Colors.black),
+      labelStyle: TextStyle(color: AppColors.instance.black),
       errorStyle: const TextStyle(color: Colors.redAccent),
     ),
   );
