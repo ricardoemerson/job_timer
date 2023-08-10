@@ -48,4 +48,7 @@ class ProjectService implements IProjectService {
 
     return ProjectModel.fromEntity(project);
   }
+
+  @override
+  Future<void> finishById(int id) => _projectRepository.finishById(id);
 }

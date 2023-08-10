@@ -21,4 +21,13 @@ class ProjectDetailCubit extends Cubit<ProjectDetailState> {
 
     emit(state.copyWith(project: project));
   }
+
+  Future<void> finishProject() async {
+    emit(state.copyWith(status: ProjectDetailStatus.loading));
+
+    await _projectService.finishById(state.project!.id!);
+    updateProject();
+
+    emit(state.copyWith(status: ProjectDetailStatus.success));
+  }
 }

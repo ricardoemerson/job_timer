@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../core/base_state/base_state.dart';
+import '../../../data/enums/project_status_enum.dart';
 import '../../../data/models/project_model.dart';
 import 'project_detail_cubit.dart';
 import 'project_detail_state.dart';
@@ -69,10 +70,13 @@ class _ProjectDetailPageState extends BaseState<ProjectDetailPage, ProjectDetail
                   alignment: Alignment.bottomRight,
                   child: Padding(
                     padding: const EdgeInsets.all(20),
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: PhosphorIcon(PhosphorIcons.regular.checkCircle),
-                      label: const Text('Finalizar projeto'),
+                    child: Visibility(
+                      visible: project?.status != ProjectStatusEnum.finalizado,
+                      child: ElevatedButton.icon(
+                        onPressed: cubit.finishProject,
+                        icon: PhosphorIcon(PhosphorIcons.regular.checkCircle),
+                        label: const Text('Finalizar projeto'),
+                      ),
                     ),
                   ),
                 ),

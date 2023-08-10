@@ -94,4 +94,24 @@ class ProjectRepository implements IProjectRepository {
       throw RepositoryException(message);
     }
   }
+
+  @override
+  Future<void> finishById(int id) async {
+    try {
+      final connection = await _database.openConnection();
+
+      final project = await findById(id);
+      project.status = ProjectStatusEnum.finalizado;
+
+      await connection.writeTxn(() async {
+        await connection.projects.put(project);
+      });
+    } on IsarError catch (err, s) {
+      const message = 'Erro ao finalizar projeto.';
+
+      log(message, error: err, stackTrace: s);
+
+      throw RepositoryException(message);
+    }
+  }
 }
