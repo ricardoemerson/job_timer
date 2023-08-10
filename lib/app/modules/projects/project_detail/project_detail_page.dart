@@ -45,6 +45,9 @@ class _ProjectDetailPageState extends BaseState<ProjectDetailPage, ProjectDetail
         builder: (context, state) {
           final project = state.project;
 
+          final totalTasksDuration = project?.tasks
+              .fold<int>(0, (previousValue, element) => previousValue += element.duration);
+
           return CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
@@ -52,16 +55,12 @@ class _ProjectDetailPageState extends BaseState<ProjectDetailPage, ProjectDetail
               SliverList(
                 delegate: SliverChildListDelegate([
                   const SizedBox(height: 50),
-                  const ProjectPieChart(
-                    projectHoursEstimated: 200,
-                    hoursAccomplished: 20,
+                  ProjectPieChart(
+                    projectHoursEstimated: project?.estimate ?? 0,
+                    hoursAccomplished: totalTasksDuration ?? 0,
                   ),
                   const SizedBox(height: 30),
-                  const ProjectTaskTile(),
-                  const ProjectTaskTile(),
-                  const ProjectTaskTile(),
-                  const ProjectTaskTile(),
-                  const ProjectTaskTile(),
+                  ...project?.tasks.map((e) => ProjectTaskTile(projectTask: e)).toList() ?? [],
                 ]),
               ),
               SliverFillRemaining(

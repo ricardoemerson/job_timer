@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/app_text_styles_extension.dart';
+import '../../../../data/models/project_task_model.dart';
 
 class ProjectTaskTile extends StatelessWidget {
-  const ProjectTaskTile({super.key});
+  final ProjectTaskModel projectTask;
+
+  const ProjectTaskTile({
+    super.key,
+    required this.projectTask,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,11 @@ class ProjectTaskTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Task name', style: context.textStyles.textRegular),
+              Text(
+                projectTask.name,
+                style: context.textStyles.textRegular,
+                overflow: TextOverflow.ellipsis,
+              ),
               Text.rich(
                 TextSpan(
                   style: context.textStyles.textRegular,
@@ -30,7 +40,7 @@ class ProjectTaskTile extends StatelessWidget {
                     ),
                     const TextSpan(text: '  '),
                     TextSpan(
-                      text: '4h',
+                      text: '${projectTask.duration}h',
                       style: context.textStyles.textBold,
                     ),
                   ],
