@@ -5,6 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../data/enums/project_status_enum.dart';
 import '../../../../data/models/project_model.dart';
+import '../project_detail_cubit.dart';
 
 class ProjectDetailSliverAppBar extends SliverAppBar {
   final ProjectModel? project;
@@ -58,11 +59,13 @@ class ProjectDetailSliverAppBar extends SliverAppBar {
                                 style: AppTextStyles.instance.textMedium,
                               ),
                               sliver: TextButton.icon(
-                                onPressed: () {
-                                  Modular.to.pushNamed(
+                                onPressed: () async {
+                                  await Modular.to.pushNamed(
                                     '/projects/project-task-register',
                                     arguments: project,
                                   );
+
+                                  Modular.get<ProjectDetailCubit>().updateProject();
                                 },
                                 icon: PhosphorIcon(
                                   PhosphorIcons.fill.plusCircle,

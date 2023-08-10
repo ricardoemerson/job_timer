@@ -52,7 +52,10 @@ class _ProjectDetailPageState extends BaseState<ProjectDetailPage, ProjectDetail
               SliverList(
                 delegate: SliverChildListDelegate([
                   const SizedBox(height: 50),
-                  const ProjectPieChart(),
+                  const ProjectPieChart(
+                    projectHoursEstimated: 200,
+                    hoursAccomplished: 20,
+                  ),
                   const SizedBox(height: 30),
                   const ProjectTaskTile(),
                   const ProjectTaskTile(),

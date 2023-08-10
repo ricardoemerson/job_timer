@@ -5,10 +5,19 @@ import '../../../../core/extensions/app_colors_extension.dart';
 import '../../../../core/extensions/app_text_styles_extension.dart';
 
 class ProjectPieChart extends StatelessWidget {
-  const ProjectPieChart({super.key});
+  final int projectHoursEstimated;
+  final int hoursAccomplished;
+
+  const ProjectPieChart({
+    super.key,
+    required this.projectHoursEstimated,
+    required this.hoursAccomplished,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final residual = projectHoursEstimated - hoursAccomplished;
+
     return SizedBox(
       width: 200,
       height: 200,
@@ -19,24 +28,24 @@ class ProjectPieChart extends StatelessWidget {
             PieChartData(
               sections: [
                 PieChartSectionData(
-                  value: 50,
+                  value: hoursAccomplished.toDouble(),
                   color: context.colors.primary,
                   showTitle: true,
-                  title: '50h',
+                  title: '${hoursAccomplished}h',
                   titleStyle: context.textStyles.textMedium.copyWith(color: Colors.white),
                 ),
                 PieChartSectionData(
-                  value: 150,
+                  value: residual.toDouble(),
                   color: context.colors.primaryLight,
                   showTitle: true,
-                  title: '150h',
+                  title: '${residual}h',
                   titleStyle: context.textStyles.textMedium.copyWith(color: Colors.white),
                 ),
               ],
             ),
           ),
           Text(
-            '200h',
+            '${projectHoursEstimated}h',
             style: context.textStyles.textBold.copyWith(
               fontSize: 25,
               color: context.colors.primary,

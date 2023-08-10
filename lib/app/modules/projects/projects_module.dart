@@ -12,7 +12,7 @@ class ProjectsModule extends Module {
   @override
   List<Bind> get binds => [
         BlocBind.lazySingleton((i) => ProjectRegisterCubit(projectService: i())),
-        BlocBind.lazySingleton((i) => ProjectDetailCubit()),
+        BlocBind.lazySingleton((i) => ProjectDetailCubit(projectService: i())),
         BlocBind.lazySingleton((i) => ProjectTaskRegisterCubit(projectService: i())),
       ];
 
