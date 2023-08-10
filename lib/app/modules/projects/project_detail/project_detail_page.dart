@@ -1,12 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../core/base_state/base_state.dart';
 import '../../../data/models/project_model.dart';
 import 'project_detail_cubit.dart';
+import 'project_detail_state.dart';
 import 'widgets/project_detail_sliver_app_bar.dart';
 import 'widgets/project_pie_chart.dart';
 import 'widgets/project_task_tile.dart';
@@ -19,50 +19,65 @@ class ProjectDetailPage extends StatefulWidget {
 }
 
 class _ProjectDetailPageState extends BaseState<ProjectDetailPage, ProjectDetailCubit> {
-  ProjectModel? project;
-
   @override
   void onReady() {
     super.onReady();
 
-    project = Modular.args.data as ProjectModel;
-    log('project: $project');
+    final project = Modular.args.data as ProjectModel;
+    cubit.setProject(project);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          ProjectDetailSliverAppBar(project: project!),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              const SizedBox(height: 50),
-              const ProjectPieChart(),
-              const SizedBox(height: 30),
-              const ProjectTaskTile(),
-              const ProjectTaskTile(),
-              const ProjectTaskTile(),
-              const ProjectTaskTile(),
-              const ProjectTaskTile(),
-            ]),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: PhosphorIcon(PhosphorIcons.regular.checkCircle),
-                  label: const Text('Finalizar projeto'),
-                ),
+      body: BlocConsumer<ProjectDetailCubit, ProjectDetailState>(
+        bloc: cubit,
+        listener: (context, state) {
+          state.status.matchAny(
+            loading: () => showLoader(),
+            error: () {
+              hideLoader();
+              showError(state.errorMessage ?? 'Erro não informado.');
+            },
+            any: () => hideLoader(),
+          );
+        },
+        builder: (context, state) {
+          final project = state.project;
+
+          return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              ProjectDetailSliverAppBar(project: project),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  const SizedBox(height: 50),
+                  const ProjectPieChart(),
+                  const SizedBox(height: 30),
+                  const ProjectTaskTile(),
+                  const ProjectTaskTile(),
+                  const ProjectTaskTile(),
+                  const ProjectTaskTile(),
+                  const ProjectTaskTile(),
+                ]),
               ),
-            ),
-          )
-        ],
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: PhosphorIcon(PhosphorIcons.regular.checkCircle),
+                      label: const Text('Finalizar projeto'),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }

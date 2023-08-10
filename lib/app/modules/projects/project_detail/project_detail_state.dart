@@ -1,10 +1,45 @@
-part of 'project_detail_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:match/match.dart';
 
-sealed class ProjectDetailState extends Equatable {
-  const ProjectDetailState();
+import '../../../data/models/project_model.dart';
+
+part 'project_detail_state.g.dart';
+
+@match
+enum ProjectDetailStatus { initial, loading, success, error }
+
+class ProjectDetailState extends Equatable {
+  final ProjectDetailStatus status;
+  final ProjectModel? project;
+  final String? errorMessage;
+
+  const ProjectDetailState(
+    this.status,
+    this.project,
+    this.errorMessage,
+  );
+
+  const ProjectDetailState.initial()
+      : status = ProjectDetailStatus.initial,
+        project = null,
+        errorMessage = null;
+
+  ProjectDetailState copyWith({
+    ProjectDetailStatus? status,
+    ProjectModel? project,
+    String? errorMessage,
+  }) {
+    return ProjectDetailState(
+      status ?? this.status,
+      project ?? this.project,
+      errorMessage ?? this.errorMessage,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
+  List<Object?> get props => [status, project, errorMessage];
 
-final class ProjectDetailInitial extends ProjectDetailState {}
+  @override
+  String toString() =>
+      'ProjectDetailState(status: $status, project: $project, errorMessage: $errorMessage)';
+}
