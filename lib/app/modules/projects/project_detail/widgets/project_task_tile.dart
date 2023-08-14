@@ -25,10 +25,12 @@ class ProjectTaskTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                projectTask.name,
-                style: context.textStyles.textRegular,
-                overflow: TextOverflow.ellipsis,
+              Flexible(
+                child: Text(
+                  projectTask.name,
+                  style: context.textStyles.textRegular,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Text.rich(
                 TextSpan(
